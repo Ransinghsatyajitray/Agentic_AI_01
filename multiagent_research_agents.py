@@ -1,3 +1,4 @@
+# LOADING THE PACKAGES
 import os
 from dotenv import load_dotenv
 from crewai import Agent
@@ -5,6 +6,8 @@ from crewai_tools import SerperDevTool
 from crewai import Task
 from crewai import Crew, Process
 
+
+# LOADING THE ENV VARIABLES
 # Load environment variables from .env file
 load_dotenv()
 
@@ -18,6 +21,8 @@ os.environ["OPENAI_MODEL"] = "gpt-4-32k"
 
 search_tool = SerperDevTool()
 
+
+# MAKING AGENTS
 # Creating a senior researcher agent with memory and verbose mode
 researcher = Agent(
     role='Senior Researcher',
@@ -50,7 +55,7 @@ writer = Agent(
 
 
 
-
+# DEFINING THE TASKS
 research_task = Task(
     description=(
         "Identify the next big trend in {topic}. "
@@ -78,7 +83,7 @@ write_task = Task(
 
 
 
-
+# FORMING THE CREW (WE DONT HAVE THIS IN SINGLE AGENT)
 # Forming the tech-focused crew with enhanced configurations
 crew = Crew(
     agents=[researcher, writer],
@@ -86,7 +91,7 @@ crew = Crew(
     process=Process.sequential  # Optional: Sequential task execution is default
 )
 
-
+# STARTING THE EXECUTION OF CREW WORK
 # Starting the task execution process with enhanced feedback
 result = crew.kickoff(inputs={'topic': 'AI in healthcare'})
 print(result)
