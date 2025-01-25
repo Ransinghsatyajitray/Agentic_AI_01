@@ -10,3 +10,11 @@ Agent - task automation
 
 
 Use **pip freeze > requirements.txt** once the code run properly to capture all the necessary dependencies with the version
+
+Please Note the SERP API and SERPER API are different.
+
+SERPER
+https://serper.dev/api-key
+
+SERP
+https://serpapi.com/dashboard

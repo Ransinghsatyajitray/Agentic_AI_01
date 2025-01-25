@@ -1,8 +1,12 @@
+# LOADING THE NECESSARY PACKAGES
+
 import os
 from dotenv import load_dotenv
 from crewai import Agent, Task, Crew
 from crewai_tools import SerperDevTool
 from langchain_openai import ChatOpenAI
+
+# LOADING THE KEYS
 
 load_dotenv()
 
@@ -11,6 +15,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 search_tool = SerperDevTool()
 
+# CREATING THE AGENT
 def create_research_agent():
 
     llm = ChatOpenAI(model="gpt-3.5-turbo")
@@ -27,7 +32,7 @@ def create_research_agent():
 
 
 
-
+# DEFINING THE TASK THE AGENT WOULD DO
 def create_research_task(agent, topic):
     return Task(
         description=f"Research the following topic and provide a comprehensive summary: {topic}",
@@ -35,6 +40,8 @@ def create_research_task(agent, topic):
         expected_output = "A detailed summary of the research findings, including key points and insights related to the topic"
     )
 
+
+# RUNNING THE RESEARCH
 def run_research(topic):
     agent = create_research_agent()
     task = create_research_task(agent, topic)
@@ -42,6 +49,8 @@ def run_research(topic):
     result = crew.kickoff()
     return result
 
+
+# RUNNING THE CODES
 if __name__ == "__main__":
     print("Welcome to the Research Agent!")
     topic = input("Enter the research topic: ")
